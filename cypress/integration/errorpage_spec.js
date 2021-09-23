@@ -2,7 +2,7 @@
 describe('404 Error page user flow', () => {
   beforeEach(() => {
     cy.Fetch404Data('GET', 'https://restcountries.eu/rest/v2/all')
-    cy.visit('http://localhost:3000')
+    cy.visit('http://localhost:3000/country/hotdog')
   });
 
   it('User should see a header with the App\'s name on page load & an error image', () => {
