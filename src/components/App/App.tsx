@@ -79,7 +79,7 @@ const App = () => {
   useEffect(() => {
     setServerError('');
     apiCalls.fetchCountriesData()
-      .then((data) => setCountries(data))
+      .then((data:any) => setCountries(data))
       .catch((err) => {
         setServerError(err)
         history.push(`/country/${err}`)
