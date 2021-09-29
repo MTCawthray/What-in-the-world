@@ -25,7 +25,7 @@ interface IAnswerProps{
 
 const Answers: React.FC<IAnswerProps> = ({ currentCountry, questions, guess }) => {
   const [answer, setAnswer] = useState<string | number>('');
-  const currency= currentCountry.currencies;
+  const [currency, setCurrency] = useState<string[]>();
   const [languages, setLanguage] = useState<string[]>();
 
    // *******************************************************
@@ -33,9 +33,9 @@ const Answers: React.FC<IAnswerProps> = ({ currentCountry, questions, guess }) =
    // *******************************************************
   const checkPopulation = () => {
     if (Number(guess) < (currentCountry.population + 50000) && Number(guess) > (currentCountry.population - 50000)) {
-      setAnswer(`Correct! The population of ${currentCountry.name} is ${currentCountry.population.toLocaleString('en-US')}!`);
+      setAnswer(`Correct! The population of ${currentCountry.name.common} is ${currentCountry.population.toLocaleString('en-US')}!`);
     } else {
-      setAnswer(`Incorrect- the population of ${currentCountry.name} is ${currentCountry.population.toLocaleString('en-US')}.`);
+      setAnswer(`Incorrect- the population of ${currentCountry.name.common} is ${currentCountry.population.toLocaleString('en-US')}.`);
     }
   }
 
@@ -77,14 +77,28 @@ const Answers: React.FC<IAnswerProps> = ({ currentCountry, questions, guess }) =
    // ***********************************************
         /*ITERATE OVER LANGUAGES OF GIVEN COUNTRY*/ 
    // ***********************************************
-  // const setLanguages = () => {
-  //   const checkLanguage = currentCountry.languages.map(country => `${country.name} `)
-  //   setLanguage(checkLanguage)
-  // }
+  const setLanguages = () => {
+    const lang = Object.values(currentCountry.languages)
+    const checkLanguage = lang.map(language =>  `${language} `)
+    setLanguage(checkLanguage)
+  }
+
+  // ***********************************************
+        /*ITERATE OVER CURRENCY OF GIVEN COUNTRY*/ 
+   // ***********************************************
+  const setCountryCurrency = () => {
+    const currencies = Object.values(currentCountry.currencies)
+    const checkCurrency = currencies.reduce((acc:any, prevVal:any) => {
+    acc.push(prevVal.name)
+    return acc
+    }, [])
+    setCurrency(checkCurrency)
+  }
 
   useEffect(() => {
     findAnswer(questions)
-    // setLanguages()
+    setLanguages()
+    setCountryCurrency()
   }, [])
 
   return (
@@ -101,7 +115,7 @@ const Answers: React.FC<IAnswerProps> = ({ currentCountry, questions, guess }) =
       <section className="extra-facts">
         <p className='country-stats'>
           {currentCountry.name.common} is located in {currentCountry.subregion}.
-          This country has the currency of and the population speaks .
+          This country has the currency of {currency} and the population speaks {languages}.
         </p>
       </section>
       <Link to="/" >

@@ -48,7 +48,6 @@ const App = () => {
    // ***********************************************
   const getCurrentCountry = () => {
     const country = countries.find(currCountry => currCountry.name.common.includes(selectedCountry));
-    console.log(country)
     setDisplayCountry(country);
   }
   
@@ -91,7 +90,7 @@ const App = () => {
               /*SETTING LOCAL STORAGE*/ 
    // ***********************************************
   useEffect(() => {
-    if (displayCountry.name) {
+    if (displayCountry) {
       localStorage.setItem('currentCountry', JSON.stringify(displayCountry));
     }
   }, [displayCountry])
@@ -134,7 +133,7 @@ const App = () => {
             <QuizPage 
               name="country"
               currentCountry={displayCountry}
-              country={displayCountry.name.common}
+              country={displayCountry.name}
             />)
           }
         }/>
