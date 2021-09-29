@@ -82,12 +82,17 @@ const Answers: React.FC<IAnswerProps> = ({ currentCountry, questions, guess }) =
     const checkLanguage = lang.map(language =>  `${language} `)
     setLanguage(checkLanguage)
   }
+
+  // ***********************************************
+        /*ITERATE OVER CURRENCY OF GIVEN COUNTRY*/ 
+   // ***********************************************
   const setCountryCurrency = () => {
     const currencies = Object.values(currentCountry.currencies)
     const checkCurrency = currencies.reduce((acc:any, prevVal:any) => {
     acc.push(prevVal.name)
     return acc
     }, [])
+    setCurrency(checkCurrency)
   }
 
   useEffect(() => {
