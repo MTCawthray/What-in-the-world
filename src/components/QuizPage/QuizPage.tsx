@@ -36,7 +36,7 @@ const QuizPage: React.FC<IQuizPageProps> = ({ currentCountry }) => {
       /*UPDATING STATE, GETTING LOCAL STORAGE*/ 
   // ***********************************************
   useEffect(() => {
-    if (currentCountry && currentCountry.name.common) {
+    if (currentCountry && currentCountry.name) {
       setCountry(currentCountry);
       getRandomElement(currentCountry.name.common);
     } else {
