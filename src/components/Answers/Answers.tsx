@@ -6,24 +6,26 @@ interface IAnswerProps{
   questions: string
   guess: string 
   currentCountry: {
-    name: string
-    languages:[{
+    name: {
+    common:string
+    }
+    languages:{
       name:string
-    }]
+    }
     population: number
     capital: string
     subregion: string
     borders: string[]
-    currencies:[{
-      name:string
-    }]
+    currencies:{
+        name:string
+    }
     flag: string
   } 
 }
 
 const Answers: React.FC<IAnswerProps> = ({ currentCountry, questions, guess }) => {
   const [answer, setAnswer] = useState<string | number>('');
-  const [currency] = currentCountry.currencies;
+  const currency= currentCountry.currencies;
   const [languages, setLanguage] = useState<string[]>();
 
    // *******************************************************
@@ -38,19 +40,25 @@ const Answers: React.FC<IAnswerProps> = ({ currentCountry, questions, guess }) =
   }
 
   const checkCapital = () => {
-    if (guess[0].toUpperCase() === currentCountry.capital.toUpperCase()) {
-      setAnswer(`Correct! The capital of ${currentCountry.name} is ${currentCountry.capital}! `);
+    if (guess[0].toUpperCase() === currentCountry.capital[0].toUpperCase()) {
+      setAnswer(`Correct! The capital of ${currentCountry.name.common} is ${currentCountry.capital}! `);
     } else {
-      setAnswer(`Incorrect- the capital of ${currentCountry.name} is ${currentCountry.capital}.`);
+      setAnswer(`Incorrect- the capital of ${currentCountry.name.common} is ${currentCountry.capital}.`);
     }
   }
 
   const checkBorders = () => {
-    if (Number(guess) === currentCountry.borders.length) {
-      setAnswer(`Correct! ${currentCountry.name} shares a border with ${currentCountry.borders.length} countries!`);
-    } else {
-      setAnswer(`Incorrect- ${currentCountry.name} shares a border with ${currentCountry.borders.length} countries.`);
+    if(currentCountry.borders) {
+      if (Number(guess) === currentCountry.borders.length) {
+        setAnswer(`Correct! ${currentCountry.name.common} shares a border with ${currentCountry.borders.length} countries!`);
+      } else {
+        setAnswer(`Incorrect- ${currentCountry.name.common} shares a border with ${currentCountry.borders.length} countries.`);
+      }
+
+    }else {
+      setAnswer(`Incorrect- ${currentCountry.name.common} does not have neighboors`)
     }
+    
   }
 
    // ***********************************************
@@ -69,19 +77,19 @@ const Answers: React.FC<IAnswerProps> = ({ currentCountry, questions, guess }) =
    // ***********************************************
         /*ITERATE OVER LANGUAGES OF GIVEN COUNTRY*/ 
    // ***********************************************
-  const setLanguages = () => {
-    const checkLanguage = currentCountry.languages.map(country => `${country.name} `)
-    setLanguage(checkLanguage)
-  }
+  // const setLanguages = () => {
+  //   const checkLanguage = currentCountry.languages.map(country => `${country.name} `)
+  //   setLanguage(checkLanguage)
+  // }
 
   useEffect(() => {
     findAnswer(questions)
-    setLanguages()
+    // setLanguages()
   }, [])
 
   return (
     <article className="answer-display">
-      {questions.includes('border') || questions.includes('population') && (
+      {questions.includes('border')|| questions.includes('population') && (
         <p className="user-guess">
           Your guess was {Number(guess).toLocaleString('en-US')}
         </p>
@@ -92,8 +100,8 @@ const Answers: React.FC<IAnswerProps> = ({ currentCountry, questions, guess }) =
       </h3>
       <section className="extra-facts">
         <p className='country-stats'>
-          {currentCountry.name} is located in {currentCountry.subregion}.
-          This country has the currency of {currency.name} and the population speaks {languages}.
+          {currentCountry.name.common} is located in {currentCountry.subregion}.
+          This country has the currency of and the population speaks .
         </p>
       </section>
       <Link to="/" >

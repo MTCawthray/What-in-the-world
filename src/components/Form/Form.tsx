@@ -5,18 +5,20 @@ import './Form.css';
 interface IFormProps{
   questions: string
   currentCountry: {
-    name: string
-    languages:[{
+    name: {
+      common:string
+    }
+    languages:{
       name:string
-    }]
+    }
     population: number
     capital: string
     flag: string
     subregion: string
     borders: string[]
-    currencies:[{
-      name:string
-    }]
+    currencies:{
+        name:string
+    }
   } 
 }
 
