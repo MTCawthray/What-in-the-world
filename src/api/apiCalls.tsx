@@ -1,7 +1,7 @@
 const apiCalls = {
 
     fetchCountriesData: ()  => {
-        return fetch('https://restcountries.eu/rest/v2/all')
+        return fetch('https://restcountries.com/v3.1/all')
             .then((response) => checkForErrors(response))
           
     }

@@ -9,7 +9,9 @@ const { v4: uuidv4 } = require('uuid');
 
 interface IAppState{
   countries: {
-    name: string
+    name: {
+      common:string
+    }
     population: number
   }[],
   currentCountry: {
@@ -36,7 +38,7 @@ const App = () => {
     return (
       <option 
         key={uuidv4()}
-        >{country.name}
+        >{country.name.common}
       </option> 
     )
   })
@@ -45,7 +47,8 @@ const App = () => {
     /*FIND COUNTRY WITH MATCHING NAME FROM DROP DOWN*/ 
    // ***********************************************
   const getCurrentCountry = () => {
-    const country = countries.find(currCountry => currCountry.name.includes(selectedCountry));
+    const country = countries.find(currCountry => currCountry.name.common.includes(selectedCountry));
+    console.log(country)
     setDisplayCountry(country);
   }
   
@@ -131,7 +134,7 @@ const App = () => {
             <QuizPage 
               name="country"
               currentCountry={displayCountry}
-              country={displayCountry.name}
+              country={displayCountry.name.common}
             />)
           }
         }/>
