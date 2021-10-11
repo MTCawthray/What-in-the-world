@@ -1,0 +1,11 @@
+language: node_js
+node_js:
+- node
+notifications:
+  email: false
+deploy:
+  api_key:
+    provider: heroku
+    secure: aXbX/rvYCNkT/bqsTGanvizN5n4QvVOa/NYqqN1HhKgl5+go2Zujohid7ABvo1+s0FFXAynmQEbiULX1TaPU1DKZh9smz3dGayRXD52Tlx4qT3e+ssU6ikAzojvPWz0Mnd2dYQvKZ5uiFOizWNzNRD9o96LY9L9t76Yaaiz4p6h6tzW5sM9D+5pZDCGszJNvITyZUJMLzd2PoUgn+v2yQUAMMWtYL/jYqnLvycGTJViUVplQmkO2bsKsPUYNsDrTmAPlh71PDZjTQHrVUXeEQUSJSGTfnukkrOXOLgyaPOac2Ic1W9vP4uZ8gu1RYoRX4dyFJjq/vrdhZ1IEbfepf1hUAQsqd2WWRTmH+sHL94aYImE1OeFn9KPQPjZkn/F7ZbhDnjXGk5Pa4vZgH/Ca9weiY04HaKHumliLArVnMOZUrIDEoblwhUK7giknVlKWSa20mmZl2HIehFtwNW54iHuutc6VVl5WyXfg5b+09cDwonwPZtXXNWqJllFnbb6DSLFGH1sUQO/fK7qMFUP54jUl9E3o2OQ4we+IibHIWejmIzm3Eb3NZR9qhmlS+7008K9zdJP0NX7BaTiQhAvZLBUDi5ScFeZ0OvqERC50UhNvW46mulOpBScdABpRiASUF4Er64RxOSalvIhv+6mOGiWdkKvXVP/wxSizBMSP2O0=
+    app: what-in-the-world-stretch
+    skip_cleanup: true
