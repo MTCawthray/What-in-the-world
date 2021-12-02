@@ -34,14 +34,18 @@ const App = () => {
    // ***********************************************
     /*PASSING ALL COUNTRY NAMES AS DROP DOWN OPTION*/ 
    // ***********************************************
-  const countryNames = countries.map(country => { 
+  const countryNames = () => {
+    let nameList = countries.map(country => country.name.common).sort();
+    let dropList = nameList.map(country => { 
     return (
       <option 
         key={uuidv4()}
-        >{country.name.common}
+        >{country}
       </option> 
     )
   })
+  return dropList;
+}
 
    // ***********************************************
     /*FIND COUNTRY WITH MATCHING NAME FROM DROP DOWN*/ 
@@ -117,7 +121,7 @@ const App = () => {
                   <option value=''>
                     {selectedCountry}
                   </option>
-                  options={countryNames} 
+                  options={countryNames()} 
                 </select>
                 <button onClick={(e) => errorCheck(e)} className="dropdown-btn">
                   Submit Country
